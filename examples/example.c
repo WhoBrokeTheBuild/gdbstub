@@ -1,4 +1,5 @@
 #define GDBSTUB_IMPLEMENTATION
+#define GDBSTUB_DEBUG
 #include <gdbstub.h>
 
 #include <stdbool.h>
@@ -10,13 +11,13 @@ typedef struct context
 
 } context_t;
 
-const char * TARGET_CONFIG = 
+const char TARGET_CONFIG[] = 
 "<?xml version=\"1.0\"?>"
 "<!DOCTYPE feature SYSTEM \"gdb-target.dtd\">"
 "<target version=\"1.0\">"
 "</target>";
 
-const char * MEMORY_MAP = 
+const char MEMORY_MAP[] = 
 "<?xml version=\"1.0\"?>"
 "<memory-map>"
 "</memory-map>";

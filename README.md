@@ -23,6 +23,18 @@ sudo make install
 
 This will install both CMake and pkg-config configuration files.
 
+## Using
+
+To use gdbstub in your program, put the following in a single source file:
+
+```c
+// If you would like gdbstub to print debug messages, you can optionally include this next line
+#define GDBSTUB_DEBUG
+
+#define GDBSTUB_IMPLEMENTATION
+#include <gdbstub.h>
+```
+
 ## Example
 
 There is a full example file in `examples/example.c`

@@ -1,5 +1,5 @@
 //
-// gdbstub version 1.0.1
+// gdbstub version 1.0.2
 //
 // MIT License
 //
@@ -254,6 +254,11 @@ void _gdbstub_send(gdbstub_t * gdb, const char * data, size_t data_length)
     gdb->packet_length = snprintf(gdb->packet, GDBSTUB_PACKET_LENGTH, "$%s#%02x", data, checksum);
 
     int bytes = send(gdb->client, gdb->packet, gdb->packet_length, 0);
+
+#   if defined(GDBSTUB_DEBUG)
+        printf("gdbstub sent '%s'\n", gdb->packet);
+#   endif
+
     if (bytes < 0) {
         perror("lost gdb connection");
         close(gdb->client);
@@ -329,6 +334,10 @@ void _gdbstub_recv(gdbstub_t * gdb)
                 send(gdb->client, "+", 1, 0);
 
                 gdb->packet[gdb->packet_length] = '\0';
+#               if defined(GDBSTUB_DEBUG)
+                    printf("gdbstub received '$%s#%c%c'\n", gdb->packet, gdb->checksum[0], gdb->checksum[1]);
+#                endif
+
                 _gdbstub_process_packet(gdb);
 
                 gdb->state = GDB_STATE_NO_PACKET;
@@ -465,6 +474,7 @@ void _gdbstub_process_packet(gdbstub_t * gdb)
         if (gdb->config.step) {
             gdb->config.step(gdb->config.user_data);
         }
+        _gdbstub_send(gdb, "OK", 2);
         return;
     case 'v':
         // Various remote operations, not supported
