@@ -3,7 +3,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.2 FATAL_ERROR)
 PROJECT(gdbstub
     LANGUAGES C
     DESCRIPTION "GDB Remote Serial Protocol stub in C"
-    VERSION 1.0.2)
+    VERSION 1.0.3)
 
 ###
 ### Install

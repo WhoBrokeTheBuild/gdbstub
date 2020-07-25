@@ -1,5 +1,5 @@
 //
-// gdbstub version 1.0.2
+// gdbstub version 1.0.3
 //
 // MIT License
 //
@@ -444,9 +444,9 @@ void _gdbstub_process_packet(gdbstub_t * gdb)
             return;
         }
         // Memory map XML
-        else if (strncmp(gdb->packet, "qXfer:features:read:target.xml:", 31) == 0) {
+        else if (strncmp(gdb->packet, "qXfer:memory-map:read::", 23) == 0) {
             int offset, length;
-            sscanf(gdb->packet + 31, "%x,%x", &offset, &length);
+            sscanf(gdb->packet + 23, "%x,%x", &offset, &length);
             _gdbstub_send_paged(gdb, offset, length, gdb->config.target_config, gdb->config.target_config_length);
             return;
         }
