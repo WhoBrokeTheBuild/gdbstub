@@ -1,5 +1,5 @@
 //
-// gdbstub version 1.0.0
+// gdbstub version 1.0.1
 //
 // MIT License
 //
@@ -408,6 +408,8 @@ void _gdbstub_process_packet(gdbstub_t * gdb)
                 strcpy(gdb->buffer + gdb->buffer_length, ";qXfer:memory-map:read+");
                 gdb->buffer_length += 23;
             }
+
+            _gdbstub_send(gdb, gdb->buffer, gdb->buffer_length);
             return;
         }
         // We have no thread ID
