@@ -1,0 +1,9 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+includedir=include
+
+Name: gdbstub
+Description: GDB Remote Serial Protocol stub in C
+Version: @VERSION@
+
+Requires:
+gdbstub: -I${includedir}
