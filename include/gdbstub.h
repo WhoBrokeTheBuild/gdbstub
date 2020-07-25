@@ -447,7 +447,11 @@ void _gdbstub_process_packet(gdbstub_t * gdb)
         else if (strncmp(gdb->packet, "qXfer:memory-map:read::", 23) == 0) {
             int offset, length;
             sscanf(gdb->packet + 23, "%x,%x", &offset, &length);
+<<<<<<< Updated upstream
             _gdbstub_send_paged(gdb, offset, length, gdb->config.target_config, gdb->config.target_config_length);
+=======
+            _gdbstub_send_paged(gdb, offset, length, gdb->config.memory_map, gdb->config.memory_map_length);
+>>>>>>> Stashed changes
             return;
         }
         // Trace control operations
