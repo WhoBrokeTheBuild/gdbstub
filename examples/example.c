@@ -22,6 +22,16 @@ const char MEMORY_MAP[] =
 "<memory-map>"
 "</memory-map>";
 
+void gdb_connected(context_t * ctx)
+{
+    printf("Connected\n");
+}
+
+void gdb_disconnected(context_t * ctx)
+{
+    printf("Disconnected\n");
+}
+
 void gdb_start(context_t * ctx)
 {
     printf("Starting\n");
@@ -72,6 +82,8 @@ int main(int argc, char ** argv)
     gdbstub_config_t config;
     config.port = 5678;
     config.user_data = &ctx;
+    config.connected = (gdbstub_connected_t)gdb_connected;
+    config.disconnected = (gdbstub_disconnected_t)gdb_disconnected;
     config.start = (gdbstub_start_t)gdb_start;
     config.stop = (gdbstub_stop_t)gdb_stop;
     config.step = (gdbstub_step_t)gdb_step;
