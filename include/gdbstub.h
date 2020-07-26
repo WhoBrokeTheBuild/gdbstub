@@ -1,5 +1,5 @@
 //
-// gdbstub version 1.1.0
+// gdbstub version 1.1.1
 //
 // MIT License
 //

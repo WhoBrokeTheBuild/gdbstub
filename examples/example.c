@@ -75,6 +75,12 @@ ssize_t gdb_get_general_registers(context_t * ctx, char * buffer, size_t buffer_
     return snprintf(buffer, buffer_length, "00000000");
 }
 
+bool at_breakpoint()
+{
+    // Detect breakpoint logic
+    return false;
+}
+
 int main(int argc, char ** argv)
 {
     context_t ctx;
@@ -106,6 +112,10 @@ int main(int argc, char ** argv)
     bool running = true;
     while (running)
     {
+        if (at_breakpoint()) {
+            gdbstub_breakpoint_hit(gdb);
+        }
+        
         // Do not call more than a couple times per second
         gdbstub_tick(gdb);
     }
