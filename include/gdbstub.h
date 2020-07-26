@@ -258,7 +258,6 @@ void gdbstub_tick(gdbstub_t * gdb)
 
 void gdbstub_breakpoint_hit(gdbstub_t * gdb) {
     _gdbstub_send(gdb, "T05", 3);
-    return;
 }
 
 void _gdbstub_send(gdbstub_t * gdb, const char * data, size_t data_length)
