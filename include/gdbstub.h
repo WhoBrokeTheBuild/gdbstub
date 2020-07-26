@@ -269,6 +269,10 @@ void _gdbstub_send(gdbstub_t * gdb, const char * data, size_t data_length)
 
 void _gdbstub_send_paged(gdbstub_t * gdb, int offset, int length, const char * data, size_t data_length)
 {
+    if (length > GDBSTUB_PACKET_LENGTH - 6) {
+        length = GDBSTUB_PACKET_LENGTH - 6;
+    }
+
     if (length < (data_length - offset)) {
         // Any page but the last
         gdb->buffer_length = snprintf(gdb->buffer, GDBSTUB_BUFFER_LENGTH, "m%.*s", length, data + offset);
