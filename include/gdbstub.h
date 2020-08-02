@@ -500,6 +500,11 @@ void _gdbstub_process_packet(gdbstub_t * gdb)
             _gdbstub_send(gdb, "lm0", 3);
             return;
         }
+        // GDB is ready to serve symbol requests
+        else if (strncmp(gdb->packet, "qSymbol", 7) == 0) {
+            _gdbstub_send(gdb, "OK", 2);
+            return;
+        }
         break;
     case 's':
         // Single execution step
