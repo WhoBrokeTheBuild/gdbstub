@@ -337,7 +337,9 @@ void _gdbstub_recv(gdbstub_t * gdb)
                 gdb->packet_checksum = 0;
             }
             else if (c == 3) {
-                // TODO: investigate
+                // GDB Interrupt '0x03' Packet
+                gdb->config.stop(gdb->config.user_data);
+                _gdbstub_send(gdb, "S00", 3);
             }
             break;
         case GDB_STATE_IN_PACKET:
